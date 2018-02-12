@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <title>Index</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class='container'>
+    <table class='table'>
+      <tr>
+        <td>ID</td>
+        <td>From</td>
+        <td>Body</td>
+      </tr>
+      <% for (let i = 0; i < data.length; i++) { %>
+        <tr>
+          <td>
+            <%= i %>
+          </td>
+          <td>
+            <%= data[i].From %>
+          </td>
+          <td>
+            <%= data[i].Body %>
+          </td>
+        </tr>
+        <% } %>
+    </table>
+  </div>
+</body>
+</div>
+
+</html>
