@@ -4,6 +4,7 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 /* Step 3 */
 const { Client } = require('pg')
+/* End Step 3 */
 
 const PORT = process.env.PORT || 3000
 
@@ -30,11 +31,30 @@ app.post('/sms', function (req, res) {
     // https://www.twilio.com/docs/api/twiml/sms/twilio_request
     const { From, Body } = req.body
 
-    // Deleted in step 4 and step 2, respectively
-    // database.push({ From, Body })
-    // res.send("OK")
+    /* Deleted in step 4
+    database.push({ From, Body })
+    /* End deleted in step 4 */
 
-    /* Step 2 */
+    /* Deleted step 2
+    res.send("OK")
+    /* End deleted in step 2 */
+
+
+    /* Step 4 */
+    client.query('INSERT INTO sms(data) VALUES($1)', [{ From, Body }])
+        .then(() => {
+            const mrsp = new MessagingResponse()
+            const msg = mrsp.message()
+            msg.body('Message has been received! Thanks!')
+
+            // optional; because default is text/html which is OK for Twilio
+            res.set('Content-Type', 'text/xml')
+            res.send(mrsp.toString())
+        })
+        .catch(err => res.status(500).send(err.message))
+    /* Step 4 End */
+
+    /* Step 2; move up in step 4 
     const mrsp = new MessagingResponse()
     const msg = mrsp.message()
     msg.body('Message has been received! Thanks!')
@@ -52,12 +72,15 @@ app.get('/sms', function (req, res) {
         })
     }).catch((err) => res.status(500).send(err.message))
 
-    /* Deleted in step 4
+    /* Delete in step 4
     res.render('index', {
         data: database
-    })*/
+    })
+    /* End delete in step 4*/
 })
+/* End Step 1 */
 
+/* Step 3 */
 app.get('/db/create', function (req, res) {
     // https://node-postgres.com/features/types#uuid-json-jsonb
     const createDBText = `
@@ -87,7 +110,6 @@ app.get('/db', function (req, res) {
     }).catch((err) => res.status(500).send(err.message))
 })
 
-/* Step 3 */
 client.connect(function (err) {
     if (err) throw err
 
