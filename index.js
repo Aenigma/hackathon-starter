@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser')
 const express = require('express')
+/* Step 1 */
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+/* End step 1 */
 
 /* Step 3 */
 const { Client } = require('pg')
