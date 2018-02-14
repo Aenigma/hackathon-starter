@@ -6,7 +6,7 @@
         {
             "label": "Build Slides",
             "type": "shell",
-            "command": "pandoc -t revealjs -s -o slides.html slides.md -V revealjs-url=http://lab.hakim.se/reveal-js",
+            "command": "pandoc -t revealjs -s -o slides.html slides.md -V revealjs-url=https://lab.hakim.se/reveal-js",
             "group": "build",
             "problemMatcher": []
         },
