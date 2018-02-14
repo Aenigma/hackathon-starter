@@ -48,18 +48,6 @@ title: How to Win Hackathons
 
 You need a [Twilio account](https://www.twilio.com/) and a [Heroku account](https://heroku.com); we'll be using their pepertually free plans
 
-# Setup
+# Coding
 
-First, let's create a directory and navigate to it. Get into command prompt and issue these commands:
-
-    $ git init
-    $ npm init # press enter for everything; the defaults are fine
-    $ npm install --save express ejs
-
-Now, we need to log into Heroku. Be warned that the first time you do it, it may take some time as it will update itself and you need to issue this command in either command prompt or PowerShell (not Git Bash):
-
-    $ heroku login
-
-# Coding!!!
-
-Check the branches for steps!
+Go to [https://github.com/Aenigma/hackathon-starter](https://github.com/Aenigma/hackathon-starter) and follow along with the README!
