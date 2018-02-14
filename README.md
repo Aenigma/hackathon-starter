@@ -127,6 +127,17 @@ client.connect(function (err) {
 Now that we have some boiler plate to get going with postgres, we can adapt the code by replacing operations
 on the `database` global variable with SQL queries.
 
-1. Change the code in `app.post('/sms', ...)` to remove references to database and essentially move up the
-logic into the promise chain so that it only responds correctly when the database entry is successfully entered
-2. Change `app.get('/sms', ...)` to call an SQL query and return the result of it rather than returning the `database` global
+Change `app.get('/sms', ...)` to call an SQL query and return the result of it rather than returning the `database` global
+
+Change the code in `app.post('/sms', ...)` to remove references to database and copy the SQL query for insertion and use
+the actual data POSTed rather than sample data.
+
+You'll also be moving up the logic into the promise chain so that it only responds correctly when the database entry
+is successfully entered.
+
+```javascript
+client.query('INSERT INTO sms(data) VALUES($1)', [{ From, Body }])
+    .then(() => {
+        // logic+respond here
+    }).catch(err => res.status(500).send(err.message))
+```
