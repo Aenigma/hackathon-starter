@@ -23,17 +23,23 @@ const database = [{ From: 'somebody', Body: 'some text message' }]
 
 app.post('/sms', function (req, res) {
     const { From, Body } = req.body
-    database.push({ From, Body })
 
-    const mrsp = new MessagingResponse()
-    const msg = mrsp.message()
-    msg.body('Message has been received! Thanks!')
+    client.query('INSERT INTO sms(data) VALUES($1)', [{ From, Body }])
+        .then(() => {
+            const mrsp = new MessagingResponse()
+            const msg = mrsp.message()
+            msg.body('Message has been received! Thanks!')
 
-    res.send(mrsp.toString())
+            res.send(mrsp.toString())
+        }).catch(err => res.status(500).send(err.message))
 })
 
 app.get('/sms', function (req, res) {
-    res.render('index', { data: database })
+    client.query('SELECT data FROM sms').then(results => {
+        res.render('index', {
+            data: results.rows.map(row => row.data)
+        })
+    }).catch((err) => res.status(500).send(err.message))
 })
 
 app.get('/db/create', function (req, res) {
