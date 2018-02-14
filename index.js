@@ -20,7 +20,7 @@ app.post('/sms', function (req, res) {
 })
 
 app.get('/sms', function (req, res) {
-    res.json(database)
+    res.render('index', { data: database })
 })
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
